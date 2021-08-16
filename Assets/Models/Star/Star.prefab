@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 6451243111182040504}
   - component: {fileID: 7684293338486081369}
   - component: {fileID: 3534594893837298524}
+  - component: {fileID: 386234685809048890}
   - component: {fileID: 7918494730336180406}
   - component: {fileID: 4669086103937867274}
   m_Layer: 0
-  m_Name: StarGO
+  m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +98,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6086929749195200348}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!135 &386234685809048890
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086929749195200348}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7918494730336180406
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -342,7 +342,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ede56a88d1c8742baa0a064f4cd8a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starGO: {fileID: 6451243111182040504, guid: b53b2587bfe75ac4898ddd1ab2da3443, type: 3}
-  planetGO: {fileID: 0}
-  numberOfStar: 8
-  radius: 5
+  GalaxyPrefab: {fileID: 5739552111094587850, guid: cd35f02c1a6f0a949a543f1d64efeb5d, type: 3}
