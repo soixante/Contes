@@ -7,13 +7,9 @@ public class Star : MonoBehaviour {
     protected float rotationSpeed;
     protected Animator animator;
     protected Material material;
+    public Vector3 targetPosition;
     int idleState = Animator.StringToHash("idle");
     int bumpState = Animator.StringToHash("bump");
-    protected bool toDraw = false;
-
-    protected void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(transform.position, 5.0f);
-    }
 
 
     // Start is called before the first frame update
@@ -25,14 +21,20 @@ public class Star : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        Collider[] positionCollider = Physics.OverlapSphere(transform.position, 3.0f);
-        if (positionCollider.Length > 1) {
-            toDraw = true;
-        } else {
-            toDraw = false;
+        if (targetPosition != transform.position) {
+            Vector3 currentPosition = transform.position;
+            float transition = 1.5f * Time.deltaTime;
+            Vector3 newPosition = Vector3.Lerp(currentPosition, targetPosition, transition);
+
+            float currentDistance = Vector3.Distance(newPosition, targetPosition);
+            if (currentDistance < 0.02f) {
+                newPosition = targetPosition;
+            }
+
+            transform.position = newPosition;
         }
 
-        //transform.Rotate(0f, -0.02f * rotationSpeed, 0.0f, Space.World);
+        transform.Rotate(0f, -0.02f * rotationSpeed, 0.0f, Space.World);
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         bool toBump = Random.Range(0.0f, 2.0f) > 1.8f;

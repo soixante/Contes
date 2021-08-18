@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Galaxy : MonoBehaviour {
-    const int numberOfStars = 30;
-    const float galaxyRadius = 10f;
+    const int numberOfStars = 100;
+    const float galaxyRadius = 30f;
     protected int gigou = 0;
-    public Material materia = null;
-
 
     public GameObject StarPrefab;
+    protected GameObject initStar;
+    protected Vector3 targetPosition;
 
     // Start is called before the first frame update
     void Start() {
@@ -18,66 +18,73 @@ public class Galaxy : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            createStar();
-        }
     }
 
     protected void createStars() {
+        Vector3 currentPosition;
         int failed = 0;
-        int eternali = 0;
-        for (int i = 0; i < numberOfStars; i++) {
-            Vector3 pos = getInitialPosition();
-            Vector3 newPos = getRandomPosition();
-            Quaternion rot = getInitialRotation();
-
-            GameObject star = Instantiate(StarPrefab, pos, rot);
-            star.name = $"star{eternali}";
-            star.transform.position = newPos;
-            star.GetComponent<SphereCollider>().radius = 1.5f;
-            Collider[] positionCollider = Physics.OverlapSphere(newPos, 5.0f);
-
-            if (positionCollider.Length == 0) {
-                failed = 0;
-            } else {
-                Destroy(star);
-                i--;
+        for(int i=0; i<numberOfStars; i++) {
+            currentPosition = getRandomPosition();
+            if (!createStarAt(currentPosition)) {
                 failed++;
+                i--;
+            } else {
+                failed = 0;
             }
 
             if (failed > numberOfStars) {
                 Debug.Log("failed");
                 break;
             }
-            eternali++;
         }
     }
-
-    protected void createStar() {
-        Vector3 newPos = getRandomPosition();
-        GameObject star = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        star.transform.position = newPos;
-        star.name = $"star{gigou}";
-        Collider[] positionCollider = Physics.OverlapSphere(newPos, 3.0f);
-
-        if (positionCollider.Length > 1) {
-            Debug.Log($"currentObject : {star.name}, collision object : {positionCollider[0].gameObject.name}");
+    
+    protected bool createStarAt(Vector3 targetPosition) {
+        GameObject star = createDefaultStar();
+        star.transform.localPosition = targetPosition;
+        star.GetComponent<Collider>().enabled = false;
+        Collider[] positionCollider = Physics.OverlapSphere(targetPosition, 2.0f);
+        if (positionCollider.Length == 0) {
+            star.GetComponent<Collider>().enabled = true;
+            star.GetComponent<Star>().targetPosition = targetPosition;
+        } else {
             Destroy(star);
+            return false;
         }
-        gigou++;
+
+        positionCollider = Physics.OverlapSphere(targetPosition, 6.0f);
+        if (positionCollider.Length == 0) {
+            Destroy(star);
+        } else {
+            star.GetComponent<Collider>().enabled = true;
+            star.GetComponent<Star>().targetPosition = targetPosition;
+            return true;
+        }
+
+        return false;
+    }
+
+    protected GameObject createDefaultStar() {
+        Vector3 pos = getInitialPosition();
+        Quaternion rot = getInitialRotation();
+        GameObject star = Instantiate(StarPrefab, pos, rot, transform);
+
+        return star;
     }
 
     protected Vector3 getRandomPosition() {
-        float angle = Random.Range(0.0f, 2 * Mathf.PI);
-        float dist = Random.Range(0.0f, galaxyRadius);
+        return Random.insideUnitSphere* galaxyRadius;
+        //float anglex = Random.Range(0.0f, 2 * Mathf.PI);
+        //float angley = Random.Range(0.0f, 2 * Mathf.PI);
+        //float dist = Random.Range(0.0f, galaxyRadius);
 
-        float x = Mathf.Cos(angle) * dist;
-        float z = Mathf.Sin(angle) * dist;
+        //float x = Mathf.Cos(angle) * dist;
+        //float z = Mathf.Sin(angle) * dist;
 
 
-        Vector3 pos = transform.position + new Vector3(x, 0, z);
+        //Vector3 pos = transform.position + new Vector3(x, 0, z);
 
-        return pos;
+        //return pos;
     }
 
     protected Vector3 getInitialPosition() {

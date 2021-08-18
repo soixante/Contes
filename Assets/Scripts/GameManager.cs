@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        Vector3 cameraPosition = Camera.main.transform.localPosition;
+        cameraPosition.x += Input.GetAxis("Horizontal") * Time.deltaTime * 20;
+        cameraPosition.y += Input.GetAxis("Vertical") * Time.deltaTime * 20;
+        Camera.main.transform.localPosition = cameraPosition;
     }
 
     protected void createGalaxy() {
