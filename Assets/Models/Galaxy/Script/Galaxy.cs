@@ -5,7 +5,7 @@ using UnityEngine;
 public class Galaxy : MonoBehaviour {
     const int numberOfStars = 100;
     const float galaxyRadius = 30f;
-    protected int gigou = 0;
+    public int currentStarCount = 0;
 
     public GameObject StarPrefab;
     protected GameObject initStar;
@@ -18,6 +18,20 @@ public class Galaxy : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            destroyStars();
+            createStars();
+        }
+    }
+
+    public GameObject getRandomStar() {
+        return createDefaultStar();
+    }
+
+    protected void destroyStars() {
+        for (int i=0; i<transform.childCount; i++) {
+            Destroy(transform.GetChild(i).gameObject);
+        }
     }
 
     protected void createStars() {
@@ -25,6 +39,7 @@ public class Galaxy : MonoBehaviour {
         int failed = 0;
         for(int i=0; i<numberOfStars; i++) {
             currentPosition = getRandomPosition();
+            currentPosition.y = 0;
             if (!createStarAt(currentPosition)) {
                 failed++;
                 i--;
@@ -36,6 +51,8 @@ public class Galaxy : MonoBehaviour {
                 Debug.Log("failed");
                 break;
             }
+
+            currentStarCount = i+1;
         }
     }
     
@@ -73,18 +90,17 @@ public class Galaxy : MonoBehaviour {
     }
 
     protected Vector3 getRandomPosition() {
-        return Random.insideUnitSphere* galaxyRadius;
-        //float anglex = Random.Range(0.0f, 2 * Mathf.PI);
-        //float angley = Random.Range(0.0f, 2 * Mathf.PI);
-        //float dist = Random.Range(0.0f, galaxyRadius);
+        //return Random.insideUnitSphere* galaxyRadius;
+        float angle = Random.Range(0.0f, 2 * Mathf.PI);
+        float dist = Random.Range(0.0f, galaxyRadius);
 
-        //float x = Mathf.Cos(angle) * dist;
-        //float z = Mathf.Sin(angle) * dist;
+        float x = Mathf.Cos(angle) * dist;
+        float z = Mathf.Sin(angle) * dist;
 
 
-        //Vector3 pos = transform.position + new Vector3(x, 0, z);
+        Vector3 pos = transform.position + new Vector3(x, 0, z);
 
-        //return pos;
+        return pos;
     }
 
     protected Vector3 getInitialPosition() {
