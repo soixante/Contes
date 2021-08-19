@@ -18,29 +18,43 @@ public class Galaxy : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            destroyStars();
-            createStars();
-        }
     }
 
     public GameObject getRandomStar() {
+        //bool starFound = false;
+        //bool failed = false;
+        //int failedAttempt = 0;
+        //while (!starFound && !failed) {
+        //    int i = Random.Range(0, currentStarCount);
+        //    Transform star = transform.Find($"star_{i}");
+        //    if (star != null) {
+        //        return star.gameObject;
+        //    }
+        //    failedAttempt++;
+        //    if (failedAttempt > currentStarCount) {
+        //        failed = true;
+        //    }
+        //}
+
+        //Debug.Log("Fail finding random star");
+        //return null;
         return createDefaultStar();
     }
 
     protected void destroyStars() {
-        for (int i = 0; i < transform.childCount; i++) {
-            Destroy(transform.GetChild(i).gameObject);
-        }
+        //for (int i = transform.childCount-1; i >= 0; i--) {
+        //    Destroy(transform.GetChild(i).gameObject);
+        //}
     }
 
     protected void createStars() {
         Vector3 currentPosition;
         int failed = 0;
-        for (int i = 0; i < numberOfStars; i++) {
+        int i;
+        for (i = 0; i < numberOfStars; i++) {
             currentPosition = getRandomPosition();
             currentPosition.y = 0;
-            if (!createStarAt(currentPosition)) {
+            if (!createStarAt(currentPosition, $"star_{i}")) {
                 failed++;
                 i--;
             } else {
@@ -51,17 +65,21 @@ public class Galaxy : MonoBehaviour {
                 Debug.Log("failed");
                 break;
             }
-
-            currentStarCount = i;
         }
+
+        currentStarCount = i;
 
     }
 
-    protected bool createStarAt(Vector3 targetPosition) {
+    protected bool createStarAt(Vector3 targetPosition, string name) {
         bool collision = true;
         bool isolated = false;
 
-        Collider[] positionCollider = Physics.OverlapSphere(targetPosition, 2.0f);
+        GameObject star = createDefaultStar();
+
+        star.GetComponent<Collider>().enabled = false;
+
+        Collider[] positionCollider = Physics.OverlapSphere(targetPosition, 3.0f);
         if (positionCollider.Length == 0) {
             collision = false;
         }
@@ -72,13 +90,14 @@ public class Galaxy : MonoBehaviour {
         }
 
         if (collision || isolated) {
+            Destroy(star);
             return false;
         }
 
-        GameObject star = createDefaultStar();
         star.transform.localPosition = targetPosition;
-        //star.GetComponent<Collider>().enabled = false;
-        //star.GetComponent<Collider>().enabled = true;
+        star.GetComponent<Collider>().enabled = true;
+        star.name = name;
+
         //star.GetComponent<Star>().targetPosition = targetPosition;
 
         return true;
