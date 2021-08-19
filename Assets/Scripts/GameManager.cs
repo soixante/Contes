@@ -1,26 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     public GameObject GalaxyPrefab;
+    public GameObject PlayerPrefab;
+    public Canvas Hud;
 
-    protected GameObject Galaxy;
+    protected GameObject galaxy;
+    protected GameObject player;
 
     // Start is called before the first frame update
     void Start() {
         createGalaxy();
+        initPlayer();
+        initCamera();
     }
 
     // Update is called once per frame
     void Update() {
-        Vector3 cameraPosition = Camera.main.transform.localPosition;
-        cameraPosition.x += Input.GetAxis("Horizontal") * Time.deltaTime * 20;
-        cameraPosition.y += Input.GetAxis("Vertical") * Time.deltaTime * 20;
-        Camera.main.transform.localPosition = cameraPosition;
+        if (Input.GetMouseButtonDown(0)) {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit)) {
+                if (hit.transform.name.Contains("star_")) {
+                    player.GetComponent<Player>().currentStar = hit.transform.gameObject;
+                    Camera.main.GetComponent<CameraObject>().objectToFocus = hit.transform.gameObject;
+                }
+            }
+        }
     }
 
     protected void createGalaxy() {
-        Galaxy = Instantiate(GalaxyPrefab);
+        galaxy = Instantiate(GalaxyPrefab);
+    }
+
+    protected void initPlayer() {
+        player = Instantiate(PlayerPrefab);
+        assignStartingStarToPlayer();
+    }
+
+    protected void initCamera() {
+        GameObject currentStarToFocus = player.GetComponent<Player>().currentStar;
+        Camera.main.GetComponent<CameraObject>().objectToFocus = currentStarToFocus;
+    }
+
+    protected void assignStartingStarToPlayer() {
+        GameObject currentStar = galaxy.GetComponent<Galaxy>().getRandomStar();
+
+        player.GetComponent<Player>().currentStar = currentStar;
     }
 }

@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5617bbec1acd44b4480e6a8da1dcc00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materia: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  currentStarCount: 0
   StarPrefab: {fileID: 6086929749195200348, guid: b53b2587bfe75ac4898ddd1ab2da3443, type: 3}
