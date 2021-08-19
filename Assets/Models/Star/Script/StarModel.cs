@@ -6,7 +6,6 @@ public class StarModel : MonoBehaviour
 {
     protected float rotationSpeed;
     protected Animator animator;
-    protected Material material;
     int idleState = Animator.StringToHash("idle");
     int bumpState = Animator.StringToHash("bump");
 
@@ -15,7 +14,6 @@ public class StarModel : MonoBehaviour
     {
         rotationSpeed = Random.Range(0.5f, 10f);
         animator = gameObject.GetComponent<Animator>();
-        material = gameObject.GetComponent<Material>();
     }
 
     // Update is called once per frame
