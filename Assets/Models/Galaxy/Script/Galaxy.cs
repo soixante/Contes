@@ -29,7 +29,7 @@ public class Galaxy : MonoBehaviour {
     }
 
     protected void destroyStars() {
-        for (int i=0; i<transform.childCount; i++) {
+        for (int i = 0; i < transform.childCount; i++) {
             Destroy(transform.GetChild(i).gameObject);
         }
     }
@@ -37,7 +37,7 @@ public class Galaxy : MonoBehaviour {
     protected void createStars() {
         Vector3 currentPosition;
         int failed = 0;
-        for(int i=0; i<numberOfStars; i++) {
+        for (int i = 0; i < numberOfStars; i++) {
             currentPosition = getRandomPosition();
             currentPosition.y = 0;
             if (!createStarAt(currentPosition)) {
@@ -52,33 +52,37 @@ public class Galaxy : MonoBehaviour {
                 break;
             }
 
-            currentStarCount = i+1;
+            currentStarCount = i;
         }
+
     }
-    
+
     protected bool createStarAt(Vector3 targetPosition) {
-        GameObject star = createDefaultStar();
-        star.transform.localPosition = targetPosition;
-        star.GetComponent<Collider>().enabled = false;
+        bool collision = true;
+        bool isolated = false;
+
         Collider[] positionCollider = Physics.OverlapSphere(targetPosition, 2.0f);
         if (positionCollider.Length == 0) {
-            star.GetComponent<Collider>().enabled = true;
-            star.GetComponent<Star>().targetPosition = targetPosition;
-        } else {
-            Destroy(star);
-            return false;
+            collision = false;
         }
 
         positionCollider = Physics.OverlapSphere(targetPosition, 6.0f);
         if (positionCollider.Length == 0) {
-            Destroy(star);
-        } else {
-            star.GetComponent<Collider>().enabled = true;
-            star.GetComponent<Star>().targetPosition = targetPosition;
-            return true;
+            isolated = true;
         }
 
-        return false;
+        if (collision || isolated) {
+            return false;
+        }
+
+        GameObject star = createDefaultStar();
+        star.transform.localPosition = targetPosition;
+        //star.GetComponent<Collider>().enabled = false;
+        //star.GetComponent<Collider>().enabled = true;
+        //star.GetComponent<Star>().targetPosition = targetPosition;
+
+        return true;
+
     }
 
     protected GameObject createDefaultStar() {
