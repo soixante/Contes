@@ -77,9 +77,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - CellDensity: 1
-    - CellSpeed: 1.5
-    - SolarFlares: 1.5
+    - CellDensity: 23
+    - CellSpeed: 4
+    - Luminosity: 1.5
+    - SolarFlares: 12
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -106,9 +107,10 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - luminosity: 1
     m_Colors:
-    - BaseColor: {r: 0, g: 0.07916145, b: 0.3773585, a: 0}
-    - CellColor: {r: 0.45882356, g: 0.9460832, b: 1, a: 0}
+    - BaseColor: {r: 0.5990566, g: 0.68421274, b: 1, a: 0}
+    - CellColor: {r: 0.0017354971, g: 0.32854939, b: 0.3679245, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.8773585, g: 0.120016046, b: 0.120016046, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
