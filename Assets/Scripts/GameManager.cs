@@ -42,13 +42,16 @@ public class GameManager : MonoBehaviour {
     protected IEnumerator initPlayer() {
         yield return new WaitUntil(() => galaxy.GetComponent<Galaxy>().currentStarCount > 0);
         player = Instantiate(PlayerPrefab);
+        player.name = "soixante";
 
         int i = Random.Range(0, ShipPrefabs.Length);
         GameObject ship = Instantiate(ShipPrefabs[i]);
-        GameObject star;
-        star = galaxy.GetComponent<Galaxy>().findStartingStar();
+        ship.name = "soixantecopter";
+        GameObject star = galaxy.GetComponent<Galaxy>().findStartingStar();
 
+        Debug.Log($"setting star {star.name} to {player}");
         player.GetComponent<Player>().setCurrentStar(star);
+        Debug.Log($"setting ship {ship.name} to {player}");
         player.GetComponent<Player>().setCurrentShip(ship);
     }
 
@@ -58,7 +61,8 @@ public class GameManager : MonoBehaviour {
         yield return new WaitUntil(() => player.GetComponent<Player>().currentStar != null);
         yield return new WaitUntil(() => player.GetComponent<Player>().ship != null);
 
-        Camera.main.GetComponent<CameraObject>().setObjectToFocus(player.GetComponent<Player>());
+        Debug.Log($"setting camera to {player}");
+        Camera.main.GetComponent<CameraObject>().setToSlot(player.GetComponent<Player>());
     }
 
     //protected void initCamera() {

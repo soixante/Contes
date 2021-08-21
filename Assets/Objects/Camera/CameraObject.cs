@@ -11,16 +11,23 @@ public class CameraObject : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
     }
 
-    public void setObjectToFocus(HasCameraSlotInterface objectToFocus) {
-        slot = objectToFocus;
+    public void setToSlot(HasCameraSlotInterface objectSlot) {
+        slot = objectSlot;
     }
 
 
     protected IEnumerator initialCamera() {
         yield return new WaitUntil(() => slot != null);
+        transform.position = slot.getCameraPosition();
+        Debug.Log(transform.position);
+        transform.LookAt(slot.getCameraTarget());
+        Debug.Log(slot.getCameraTarget());
+        positionCamera();
+    }
+
+    protected void positionCamera() {
         transform.position = slot.getCameraPosition();
         transform.LookAt(slot.getCameraTarget());
     }
