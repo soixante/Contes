@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public GameObject GalaxyPrefab;
     public GameObject PlayerPrefab;
     public GameObject[] ShipPrefabs;
+    public GameObject mainCamera;
 
     protected GameObject galaxy;
     protected GameObject player;
@@ -16,8 +17,6 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(createGalaxy());
         StartCoroutine(initPlayer());
         StartCoroutine(initCamera());
-        //initPlayer();
-        //initCamera();
     }
 
     // Update is called once per frame
@@ -62,17 +61,6 @@ public class GameManager : MonoBehaviour {
         yield return new WaitUntil(() => player.GetComponent<Player>().ship != null);
 
         Debug.Log($"setting camera to {player}");
-        Camera.main.GetComponent<CameraObject>().setToSlot(player.GetComponent<Player>());
+        mainCamera.GetComponent<CameraObject>().setToSlot(player.GetComponent<Player>());
     }
-
-    //protected void initCamera() {
-    //    GameObject currentStarToFocus = player.GetComponent<Player>().currentStar;
-    //    Camera.main.GetComponent<CameraObject>().objectToFocus = currentStarToFocus;
-    //}
-
-    //protected void assignStartingStarToPlayer() {
-    //    GameObject currentStar = galaxy.GetComponent<Galaxy>().getRandomStar();
-
-    //    player.GetComponent<Player>().currentStar = currentStar;
-    //}
 }

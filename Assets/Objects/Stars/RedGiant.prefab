@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8712927412822450372}
   - component: {fileID: 2268949220762763383}
   - component: {fileID: 1962184115860992314}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RedGiant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1717531242135791032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 6193018313035810116}
   - {fileID: 318477425751069305}
@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPosition: {x: 0.6, y: 1.2, z: 2}
-  cameraPosition: {x: 5, y: 5, z: 5}
-  cameraTargetPosition: {x: 0.6, y: 1.2, z: 2}
+  cameraPosition: {x: 0, y: 30, z: 0}
+  cameraTargetPosition: {x: 0, y: 0, z: 0}
 --- !u!135 &3136860409476171340
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -72,7 +72,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717531242135791032}
-  m_Mesh: {fileID: -2432090755550338912, guid: 0f92f331bab96404da9c5f88622f6817, type: 3}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &2268949220762763383
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8469494145858465668, guid: 0f92f331bab96404da9c5f88622f6817, type: 3}
+  - {fileID: 2100000, guid: c0b1807e20d5a8a42a9ada795ce72e63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -145,7 +145,8 @@ GameObject:
   - component: {fileID: 6193018313035810116}
   - component: {fileID: 6516334350337400802}
   - component: {fileID: 5193841937560420570}
-  m_Layer: 0
+  - component: {fileID: 7849932740893583394}
+  m_Layer: 3
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,6 +218,38 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9181655642439141233}
   m_Enabled: 1
+--- !u!114 &7849932740893583394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9181655642439141233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1001 &2633227634088988388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -227,6 +260,10 @@ PrefabInstance:
     - target: {fileID: 2166920218389307131, guid: d77847decb15aaf4988e2535fb4f15da, type: 3}
       propertyPath: m_Name
       value: CK1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2166920218389307131, guid: d77847decb15aaf4988e2535fb4f15da, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2166920218389307131, guid: d77847decb15aaf4988e2535fb4f15da, type: 3}
       propertyPath: m_IsActive
@@ -275,6 +312,14 @@ PrefabInstance:
     - target: {fileID: 2369015573943311517, guid: d77847decb15aaf4988e2535fb4f15da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388019149070562269, guid: d77847decb15aaf4988e2535fb4f15da, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144491912327404590, guid: d77847decb15aaf4988e2535fb4f15da, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d77847decb15aaf4988e2535fb4f15da, type: 3}
