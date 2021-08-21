@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public GameObject GalaxyPrefab;
     public GameObject PlayerPrefab;
     public GameObject[] ShipPrefabs;
+    public GameObject mainCamera;
 
     protected GameObject galaxy;
     protected GameObject player;
@@ -60,6 +61,6 @@ public class GameManager : MonoBehaviour {
         yield return new WaitUntil(() => player.GetComponent<Player>().ship != null);
 
         Debug.Log($"setting camera to {player}");
-        Camera.main.GetComponent<CameraObject>().setToSlot(player.GetComponent<Player>());
+        mainCamera.GetComponent<CameraObject>().setToSlot(player.GetComponent<Player>());
     }
 }

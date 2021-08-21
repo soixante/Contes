@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Galaxy : MonoBehaviour {
-    const int numberOfStars = 300;
+    const int numberOfStars = 150;
     const float galaxyRadius = 100f;
-    const float minimalStarDistance = 4.0f;
-    const float maximalStarDistance = 12.0f;
+    const float minimalStarDistance = 6.0f;
+    const float maximalStarDistance = 24.0f;
     public int currentStarCount = 0;
     public GameObject[] StarPrefabs;
 
