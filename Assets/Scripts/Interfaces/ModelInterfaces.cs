@@ -11,3 +11,7 @@ public interface HasCameraSlotInterface
 public interface HasPlayerSlotInterface {
     Vector3 getPlayerPosition();
 }
+
+public interface HasShipSlotInterface {
+    Vector3 getShipPosition();
+}

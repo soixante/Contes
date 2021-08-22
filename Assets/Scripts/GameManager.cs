@@ -21,16 +21,16 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //if (Input.GetMouseButtonDown(0)) {
-        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //    RaycastHit hit;
-        //    if (Physics.Raycast(ray, out hit)) {
-        //        if (hit.transform.name.Contains("star_")) {
-        //            player.GetComponent<Player>().currentStar = hit.transform.gameObject;
-        //            Camera.main.GetComponent<CameraObject>().objectToFocus = hit.transform.gameObject;
-        //        }
-        //    }
-        //}
+        if (Input.GetMouseButtonDown(0)) {
+            Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit)) {
+                if (hit.transform.name.Contains("system_")) {
+                    player.GetComponent<Player>().currentStar = hit.transform.gameObject;
+                    mainCamera.GetComponent<CameraObject>().setToSlot(player.GetComponent<Player>().currentStar.GetComponent<Star>());
+                }
+            }
+        }
     }
 
     protected IEnumerator createGalaxy() {
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour {
         yield return new WaitUntil(() => player.GetComponent<Player>().currentStar != null);
         yield return new WaitUntil(() => player.GetComponent<Player>().ship != null);
 
-        Debug.Log($"setting camera to {player}");
-        mainCamera.GetComponent<CameraObject>().setToSlot(player.GetComponent<Player>());
+        Debug.Log($"setting camera to {player} slot");
+        mainCamera.GetComponent<CameraObject>().setToSlot(player.GetComponent<Player>().currentStar.GetComponent<Star>());
     }
 }

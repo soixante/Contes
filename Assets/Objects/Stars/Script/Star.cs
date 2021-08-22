@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterface
+public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterface, HasShipSlotInterface
 {
     public Vector3 playerPosition;
     public Vector3 cameraPosition;
@@ -23,29 +23,38 @@ public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterfac
     // Update is called once per frame
     void Update() {
         standardRotation();
-        animate();
+    }
+
+    private void OnMouseEnter() {
+        if (animator != null) {
+            animator.SetBool("select", true);
+        }
+    }
+
+    private void OnMouseExit() {
+        if (animator != null) {
+            animator.SetBool("select", false);
+        }
+    }
+
+    public Vector3 getShipPosition() {
+        Vector3 absolutePosition = transform.position + (playerPosition != null ? playerPosition : Vector3.zero);
+        return absolutePosition;
     }
 
     public Vector3 getCameraPosition() {
-        return (cameraPosition != null ? cameraPosition : Vector3.zero);
+        Vector3 absolutePosition = transform.position + (cameraPosition != null ? cameraPosition : Vector3.zero);
+        return absolutePosition;
     }
 
     public Vector3 getCameraTarget() {
-        return (cameraTargetPosition != null ? cameraTargetPosition : Vector3.zero);
+        Vector3 absolutePosition = transform.position + (cameraTargetPosition != null ? cameraTargetPosition : Vector3.zero);
+        return absolutePosition;
     }
 
     public Vector3 getPlayerPosition() {
-        return (playerPosition != null ? playerPosition : Vector3.zero);
-    }
-
-    protected void animate() {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        bool toBump = Random.Range(0.0f, 2.0f) > 1.8f;
-        if (toBump && stateInfo.shortNameHash == idleState) {
-            animator.SetBool("bumpin", true);
-        } else {
-            animator.SetBool("bumpin", false);
-        }
+        Vector3 absolutePosition = transform.position + (playerPosition != null ? playerPosition : Vector3.zero);
+        return absolutePosition;
     }
 
     protected void standardRotation() {
