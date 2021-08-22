@@ -23,7 +23,6 @@ public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterfac
     // Update is called once per frame
     void Update() {
         standardRotation();
-        //animate();
     }
 
     private void OnMouseEnter() {
@@ -56,16 +55,6 @@ public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterfac
     public Vector3 getPlayerPosition() {
         Vector3 absolutePosition = transform.position + (playerPosition != null ? playerPosition : Vector3.zero);
         return absolutePosition;
-    }
-
-    protected void animate() {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        bool toBump = Random.Range(0.0f, 2.0f) > 1.8f;
-        if (toBump && stateInfo.shortNameHash == idleState) {
-            animator.SetBool("bumpin", true);
-        } else {
-            animator.SetBool("bumpin", false);
-        }
     }
 
     protected void standardRotation() {
