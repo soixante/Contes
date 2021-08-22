@@ -11,6 +11,7 @@ public class CameraObject : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        Movement();
     }
 
     public void setToSlot(HasCameraSlotInterface objectSlot) {
@@ -21,9 +22,7 @@ public class CameraObject : MonoBehaviour {
     protected IEnumerator initialCamera() {
         yield return new WaitUntil(() => slot != null);
         transform.position = slot.getCameraPosition();
-        Debug.Log(transform.position);
         transform.LookAt(slot.getCameraTarget());
-        Debug.Log(slot.getCameraTarget());
         positionCamera();
     }
 
@@ -32,29 +31,22 @@ public class CameraObject : MonoBehaviour {
         transform.LookAt(slot.getCameraTarget());
     }
 
-    //protected void Movement() {
-    //    if (objectToFocus != null && hasCameraInfos()) {
-    //        Vector3 cameraPosition = objectToFocus.transform.Find("CameraSlot").transform.position;
-    //        Transform cameraTarget = objectToFocus.transform.Find("CameraTarget").transform;
-    //        transform.LookAt(objectToFocus.transform);
+    protected void Movement() {
+        if (slot != null) {
+            Vector3 cameraPosition = slot.getCameraPosition();
 
-    //        if (cameraPosition != transform.position) {
-    //            Vector3 currentPosition = transform.position;
-    //            float transition = 1.5f * Time.deltaTime;
-    //            Vector3 newPosition = Vector3.Lerp(currentPosition, cameraPosition, transition);
+            if (cameraPosition != transform.position) {
+                Vector3 currentPosition = transform.position;
+                float transition = 1.5f * Time.deltaTime;
+                Vector3 newPosition = Vector3.Lerp(currentPosition, cameraPosition, transition);
 
-    //            float currentDistance = Vector3.Distance(newPosition, cameraPosition);
-    //            if (currentDistance < 0.01f) {
-    //                newPosition = cameraPosition;
-    //            }
+                float currentDistance = Vector3.Distance(newPosition, cameraPosition);
+                if (currentDistance < 0.01f) {
+                    newPosition = cameraPosition;
+                }
 
-    //            //transform.rotation = Quaternion.RotateTowards( transform.rotation, Quaternion.LookRotation(transform.position - newPosition), transition);
-    //            transform.position = newPosition;
-    //        }
-    //    }
-    //}
-
-    //protected bool hasCameraInfos() {
-    //    return (objectToFocus.transform.Find("CameraSlot") != null && objectToFocus.transform.Find("CameraTarget") != null) ;
-    //}
+                transform.position = newPosition;
+            }
+        }
+    }
 }

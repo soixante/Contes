@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6691297956952878889, guid: b92e58d83697e6946bdb75e44e38f0da, type: 3}
+      propertyPath: cameraPosition.y
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7163782989557045973, guid: b92e58d83697e6946bdb75e44e38f0da, type: 3}
       propertyPath: m_RootOrder
       value: 0
