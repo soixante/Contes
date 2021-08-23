@@ -45,6 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStarCount: 0
   StarPrefabs:
-  - {fileID: 1717531242135791032, guid: b92e58d83697e6946bdb75e44e38f0da, type: 3}
-  - {fileID: 3770973300487041685, guid: d56ab74b9f8bd6847a4de9043dc217f6, type: 3}
-  - {fileID: 5598853414681135179, guid: 1a1fe038a6e85614ea7d792bec644e03, type: 3}
+  - {fileID: 4305903283952353453, guid: b8007cbc7531c3c49806b1b48503bd07, type: 3}
+  - {fileID: 5895124333408741418, guid: d56ab74b9f8bd6847a4de9043dc217f6, type: 3}
+  - {fileID: 8228659338738556303, guid: 1a1fe038a6e85614ea7d792bec644e03, type: 3}
