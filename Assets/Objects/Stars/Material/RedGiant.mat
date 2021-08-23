@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RedGiant
-  m_Shader: {fileID: -6465566751694194690, guid: b21c865fb9194e44e98e81b2fa0c533e, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: edb87982c7654d84991e9e7e96c64b55, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,6 +32,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - ShipTexture:
+        m_Texture: {fileID: 2800000, guid: 5a555c91133b2af47b18b4c4cbdf744d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -92,8 +96,14 @@ Material:
     m_Floats:
     - CellDensity: 23
     - CellSpeed: 0.5
+    - Cutoff_Height: -0.56
+    - Edge: -0.05
+    - Edge_Power: 7.2
     - Luminosity: 0.1
+    - Noise_Scale: 40
+    - Noise_Strength: 1
     - SolarFlares: 12
+    - Wireframe_Size: 0.9
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -124,8 +134,11 @@ Material:
     m_Colors:
     - BaseColor: {r: 0.6886792, g: 0, b: 0.01926356, a: 1}
     - CellColor: {r: 0.21568628, g: 0.03529412, b: 0, a: 0}
+    - Edge_Color: {r: 0, g: 2.317495, b: 2.028906, a: 1}
+    - Tiling: {r: 8, g: 8, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []

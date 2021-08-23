@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterface, HasShipSlotInterface
@@ -7,9 +8,11 @@ public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterfac
     public Vector3 playerPosition;
     public Vector3 cameraPosition;
     public Vector3 cameraTargetPosition;
+    public GameObject StarLabel;
 
     protected Animator animator;
     protected float rotationSpeed;
+    protected GameObject associatedLabel;
 
     int idleState = Animator.StringToHash("idle");
     int bumpState = Animator.StringToHash("bump");
