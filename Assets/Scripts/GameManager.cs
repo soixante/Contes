@@ -21,11 +21,14 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
         if (Input.GetMouseButtonDown(0)) {
             Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
-                if (hit.transform.name.Contains("system_")) {
+                if (hit.transform.GetComponent<Star>() != null) {
                     player.GetComponent<Player>().currentStar = hit.transform.gameObject;
                     mainCamera.GetComponent<CameraObject>().setToSlot(player.GetComponent<Player>().currentStar.GetComponent<Star>());
                 }

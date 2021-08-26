@@ -5,8 +5,7 @@ using UnityEngine;
 public class Ship : MonoBehaviour {
     protected HasShipSlotInterface slot;
     protected Animator animator;
-    protected bool jumpGateAvailable = true;
-
+    protected bool jumpGateAvailable = false;
     int idleState = Animator.StringToHash("idle");
     int jumpInState = Animator.StringToHash("jump_in");
     int jumpOutState = Animator.StringToHash("jump_out");
@@ -18,6 +17,7 @@ public class Ship : MonoBehaviour {
     public void initShip(HasShipSlotInterface initialTarget) {
         slot = initialTarget;
         transform.position = slot.getShipPosition();
+        jumpGateAvailable = true;
     }
 
     // Start is called before the first frame update
@@ -47,7 +47,6 @@ public class Ship : MonoBehaviour {
                         animator.SetBool("jump_in", true);
                     }
                 }
-
             }
         }
     }

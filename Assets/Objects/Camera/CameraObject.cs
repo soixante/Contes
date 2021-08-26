@@ -49,4 +49,6 @@ public class CameraObject : MonoBehaviour {
             }
         }
     }
+
+    //Amazon.fr – Service Retour Produits. 300, route de Pithiviers.Site des 3 Arches. 45962 Orléans Cedex 9.
 }
