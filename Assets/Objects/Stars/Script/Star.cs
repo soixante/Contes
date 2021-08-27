@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterface, HasShipSlotInterface
-{
+public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterface, HasShipSlotInterface {
     public Vector3 playerPosition;
     public Vector3 cameraPosition;
     public Vector3 cameraTargetPosition;
-    public GameObject StarLabel;
 
     protected Animator animator;
     protected float rotationSpeed;
@@ -32,12 +30,25 @@ public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterfac
         if (animator != null) {
             animator.SetBool("select", true);
         }
+
+        if (associatedLabel != null) {
+            Debug.Log($"label: {associatedLabel.transform.name}");
+            associatedLabel.GetComponent<Animator>().SetBool("deployed", true);
+        }
     }
 
     private void OnMouseExit() {
         if (animator != null) {
             animator.SetBool("select", false);
         }
+        if (associatedLabel != null) {
+            Debug.Log($"label: {associatedLabel.transform.name}");
+            associatedLabel.GetComponent<Animator>().SetBool("deployed", false);
+        }
+    }
+
+    public GameObject getAssociatedLabel() {
+        return associatedLabel;
     }
 
     public Vector3 getShipPosition() {
@@ -58,6 +69,10 @@ public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterfac
     public Vector3 getPlayerPosition() {
         Vector3 absolutePosition = transform.position + (playerPosition != null ? playerPosition : Vector3.zero);
         return absolutePosition;
+    }
+
+    public void setLabel(GameObject starLabel) {
+        associatedLabel = starLabel;
     }
 
     protected void standardRotation() {

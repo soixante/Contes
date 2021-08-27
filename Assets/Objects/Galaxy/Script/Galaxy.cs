@@ -37,7 +37,6 @@ public class Galaxy : MonoBehaviour {
         int i;
         for (i = 0; i < numberOfStars; i++) {
             string starname = generateRandomStarname();
-            Debug.Log(starname);
             currentPosition = getRandomPosition();
             currentPosition.y = 0;
             createdStar = createStarAt(currentPosition, starname, i==0);
@@ -49,6 +48,7 @@ public class Galaxy : MonoBehaviour {
             } else {
                 ActiveStars[i] = createdStar;
                 createdLabel = createLabelAt(currentPosition, starname);
+                createdStar.GetComponent<Star>().setLabel(createdLabel);
                 yield return null;
                 failed = 0;
             }
@@ -70,6 +70,8 @@ public class Galaxy : MonoBehaviour {
         GameObject createdStarlabel =  Instantiate(StarLabelPrefab, pos, rot , transform);
         createdStarlabel.transform.localScale = scale;
         RectTransform rt = createdStarlabel.GetComponent<RectTransform>();
+        createdStarlabel.GetComponent<Canvas>().worldCamera = Camera.main;
+
 
         rt.sizeDelta = new Vector2(300, 5);
 
@@ -79,6 +81,7 @@ public class Galaxy : MonoBehaviour {
         tmp.fontSize = 22;
         tmp.characterSpacing = 8;
 
+        createdStarlabel.name = $"label_{starname}";
 
         return createdStarlabel;
     }

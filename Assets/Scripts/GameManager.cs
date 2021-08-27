@@ -8,9 +8,17 @@ public class GameManager : MonoBehaviour {
     public GameObject PlayerPrefab;
     public GameObject[] ShipPrefabs;
     public GameObject mainCamera;
+    public float ZoomSpeedMouse = 35f;
 
     protected GameObject galaxy;
     protected GameObject player;
+
+    //private static readonly float PanSpeed = 20f;
+    //private static readonly float ZoomSpeedTouch = 0.1f;
+
+    private static readonly float[] BoundsX = new float[] { -10f, 5f };
+    private static readonly float[] BoundsZ = new float[] { -18f, -4f };
+    private static readonly float[] ZoomBounds = new float[] { 10f, 85f };
 
     // Start is called before the first frame update
     void Start() {
@@ -24,6 +32,13 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             Application.Quit();
         }
+
+        // Check for scrolling to zoom the camera
+        float offset = Input.GetAxis("Mouse ScrollWheel");
+        if (offset != 0) {
+            mainCamera.GetComponent<Camera>().fieldOfView = Mathf.Clamp(mainCamera.GetComponent<Camera>().fieldOfView - (offset * ZoomSpeedMouse), ZoomBounds[0], ZoomBounds[1]);
+        }
+
         if (Input.GetMouseButtonDown(0)) {
             Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

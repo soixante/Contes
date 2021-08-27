@@ -668,3 +668,4 @@ MonoBehaviour:
   ShipPrefabs:
   - {fileID: 4353032283666411086, guid: b1199dbace1015b45ac84414abcc8093, type: 3}
   mainCamera: {fileID: 1180544912}
+  ZoomSpeedMouse: 35
