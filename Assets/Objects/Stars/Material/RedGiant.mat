@@ -99,10 +99,10 @@ Material:
     - Cutoff_Height: -0.56
     - Edge: -0.05
     - Edge_Power: 7.2
-    - Luminosity: 0.1
+    - Luminosity: 2
     - Noise_Scale: 40
     - Noise_Strength: 1
-    - SolarFlares: 12
+    - SolarFlares: 15
     - Wireframe_Size: 0.9
     - _AlphaClip: 0
     - _Blend: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, HasCameraSlotInterface {
+public class Player : MonoBehaviour {
     public GameObject currentStar;
     public GameObject ship;
 
@@ -13,7 +13,7 @@ public class Player : MonoBehaviour, HasCameraSlotInterface {
 
     // Update is called once per frame
     void Update() {
-        ship.GetComponent<Ship>().setTarget(currentStar.GetComponent<Star>());
+        ship.GetComponent<Ship>().setCurrentStar(currentStar);
     }
 
     public void setCurrentStar(GameObject star) {
@@ -25,19 +25,11 @@ public class Player : MonoBehaviour, HasCameraSlotInterface {
         ship.transform.position = transform.position;
     }
 
-    public Vector3 getCameraPosition() {
-        return currentStar.GetComponent<Star>().getCameraPosition();
-    }
-
-    public Vector3 getCameraTarget() {
-        return currentStar.GetComponent<Star>().getCameraTarget();
-    }
-
     protected IEnumerator initialPosition() {
         yield return new WaitUntil(() => currentStar != null);
         yield return new WaitUntil(() => ship != null);
 
-        ship.GetComponent<Ship>().initShip(currentStar.GetComponent<Star>());
+        ship.GetComponent<Ship>().initShip(currentStar);
     }
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public interface HasCameraSlotInterface 
 {
@@ -14,4 +15,8 @@ public interface HasPlayerSlotInterface {
 
 public interface HasShipSlotInterface {
     Vector3 getShipPosition();
+}
+
+public interface StarInfoMessage : IEventSystemHandler {
+    void toggleVisibilityFor(GameObject star);
 }

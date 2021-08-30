@@ -107,7 +107,8 @@ public class Galaxy : MonoBehaviour {
             "FLORENT",
             "LÉONIE",
             "CHRISTOPHE",
-            "JACQUES"
+            "JACQUES",
+            "ZAVIÉ"
             };
 
         int i = Random.Range(2, 3);

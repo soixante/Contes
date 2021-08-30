@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3399460754585227990}
   m_Layer: 7
   m_Name: Ship
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d51c3c26ff1caf489b155179e5b5461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipPosition: {x: 1.5, y: 12, z: 1.5}
 --- !u!95 &3399460754585227990
 Animator:
   serializedVersion: 3

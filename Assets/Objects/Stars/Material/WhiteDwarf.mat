@@ -79,7 +79,7 @@ Material:
     m_Floats:
     - CellDensity: 23
     - CellSpeed: 4
-    - Luminosity: 1.5
+    - Luminosity: 2
     - SolarFlares: 12
     - _AlphaClip: 0
     - _Blend: 0
