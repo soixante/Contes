@@ -77,10 +77,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - CellDensity: 4
-    - CellSpeed: 1
-    - Luminosity: 1
-    - SolarFlares: 7
+    - CellDensity: 100
+    - CellSpeed: 4
+    - Luminosity: 4
+    - SolarFlares: 10
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

@@ -8,9 +8,15 @@ public class GameManager : MonoBehaviour {
     public GameObject PlayerPrefab;
     public GameObject[] ShipPrefabs;
     public GameObject mainCamera;
+    public float ZoomSpeedMouse = 35f;
 
     protected GameObject galaxy;
     protected GameObject player;
+    protected GameObject currentFocusedStar;
+
+    private static readonly float[] BoundsX = new float[] { -10f, 5f };
+    private static readonly float[] BoundsZ = new float[] { -18f, -4f };
+    private static readonly float[] ZoomBounds = new float[] { 10f, 85f };
 
     // Start is called before the first frame update
     void Start() {
@@ -24,15 +30,40 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             Application.Quit();
         }
+
+        float offset = Input.GetAxis("Mouse ScrollWheel");
+        if (offset != 0) {
+            mainCamera.GetComponent<Camera>().fieldOfView = Mathf.Clamp(mainCamera.GetComponent<Camera>().fieldOfView - (offset * ZoomSpeedMouse), ZoomBounds[0], ZoomBounds[1]);
+        }
+
         if (Input.GetMouseButtonDown(0)) {
             Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.GetComponent<Star>() != null) {
-                    player.GetComponent<Player>().currentStar = hit.transform.gameObject;
-                    mainCamera.GetComponent<CameraObject>().setToSlot(player.GetComponent<Player>().currentStar.GetComponent<Star>());
+                    GameObject focusedStar = hit.transform.gameObject;
+
+                    if (focusedStar == currentFocusedStar) {
+                        // move player
+                        mainCamera.GetComponent<CameraObject>().focus(player);
+                        currentFocusedStar.GetComponent<Star>().setFocus(false);
+                        player.GetComponent<Player>().currentStar = focusedStar;
+                        mainCamera.GetComponent<CameraObject>().focus(player);
+                        currentFocusedStar = null;
+                    } else {
+                        // get star info
+                        focusedStar.GetComponent<Star>().setFocus(true);
+                        currentFocusedStar = focusedStar;
+                        mainCamera.GetComponent<CameraObject>().focus(focusedStar);
+                    }
                 }
             }
+        }
+
+        if (Input.GetMouseButtonDown(1)) {
+            mainCamera.GetComponent<CameraObject>().focus(player);
+            currentFocusedStar.GetComponent<Star>().setFocus(false);
+            currentFocusedStar = null;
         }
     }
 
@@ -64,6 +95,6 @@ public class GameManager : MonoBehaviour {
         yield return new WaitUntil(() => player.GetComponent<Player>().ship != null);
 
         Debug.Log($"setting camera to {player} slot");
-        mainCamera.GetComponent<CameraObject>().setToSlot(player.GetComponent<Player>().currentStar.GetComponent<Star>());
+        mainCamera.GetComponent<CameraObject>().focus(player);
     }
 }

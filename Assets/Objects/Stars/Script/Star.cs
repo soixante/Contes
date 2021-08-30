@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterface, HasShipSlotInterface
-{
-    public Vector3 playerPosition;
-    public Vector3 cameraPosition;
-    public Vector3 cameraTargetPosition;
-    public GameObject StarLabel;
-
+public class Star : MonoBehaviour {
     protected Animator animator;
     protected float rotationSpeed;
     protected GameObject associatedLabel;
+    protected string status;
+    protected bool focusedState;
 
     int idleState = Animator.StringToHash("idle");
     int bumpState = Animator.StringToHash("bump");
 
     // Start is called before the first frame update
     void Start() {
+        Quaternion rot = Quaternion.Euler(0, 45, 0);
+        transform.rotation = rot;
         rotationSpeed = Random.Range(0.5f, 10f);
         animator = transform.GetComponent<Animator>();
+        status = "UNKNOWN";
     }
 
     // Update is called once per frame
@@ -29,35 +29,43 @@ public class Star : MonoBehaviour, HasCameraSlotInterface, HasPlayerSlotInterfac
     }
 
     private void OnMouseEnter() {
-        if (animator != null) {
-            animator.SetBool("select", true);
+        if (!focusedState) {
+            if (animator != null) {
+                animator.SetBool("select", true);
+            }
+
+            if (associatedLabel != null) {
+                //associatedLabel.GetComponent<Animator>().SetBool("deployed", true);
+            }
         }
     }
 
     private void OnMouseExit() {
-        if (animator != null) {
-            animator.SetBool("select", false);
+        if (!focusedState) {
+            if (animator != null) {
+                animator.SetBool("select", false);
+            }
+            if (associatedLabel != null) {
+                //associatedLabel.GetComponent<Animator>().SetBool("deployed", false);
+            }
         }
     }
 
-    public Vector3 getShipPosition() {
-        Vector3 absolutePosition = transform.position + (playerPosition != null ? playerPosition : Vector3.zero);
-        return absolutePosition;
+    public void setFocus(bool state) {
+        focusedState = state;
+        animator.SetBool("select", false);
     }
 
-    public Vector3 getCameraPosition() {
-        Vector3 absolutePosition = transform.position + (cameraPosition != null ? cameraPosition : Vector3.zero);
-        return absolutePosition;
+    public string getStatus() {
+        return status;
     }
 
-    public Vector3 getCameraTarget() {
-        Vector3 absolutePosition = transform.position + (cameraTargetPosition != null ? cameraTargetPosition : Vector3.zero);
-        return absolutePosition;
+    public GameObject getAssociatedLabel() {
+        return associatedLabel;
     }
 
-    public Vector3 getPlayerPosition() {
-        Vector3 absolutePosition = transform.position + (playerPosition != null ? playerPosition : Vector3.zero);
-        return absolutePosition;
+    public void setLabel(GameObject starLabel) {
+        associatedLabel = starLabel;
     }
 
     protected void standardRotation() {

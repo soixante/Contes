@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 395774817307601218}
   m_Layer: 6
   m_Name: Star
-  m_TagString: Untagged
+  m_TagString: Star
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +49,6 @@ MonoBehaviour:
   playerPosition: {x: 1, y: 15, z: 1}
   cameraPosition: {x: 0, y: 30, z: 0}
   cameraTargetPosition: {x: 0, y: 0, z: 0}
-  StarLabel: {fileID: 6242295252254407808, guid: 6852859c41e9733469a0947146683a0c, type: 3}
 --- !u!33 &802738944323716146
 MeshFilter:
   m_ObjectHideFlags: 0
