@@ -95,7 +95,7 @@ Material:
     - Glitch_Amount: 3
     - Glitch_Intensity: 8
     - Noise_Scale: 300
-    - Pulse: 1
+    - Pulse: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public GameObject[] ShipPrefabs;
     public GameObject mainCamera;
     public float ZoomSpeedMouse = 35f;
+    public Canvas StarInfoCanvas;
 
     protected GameObject galaxy;
     protected GameObject player;
@@ -45,6 +47,8 @@ public class GameManager : MonoBehaviour {
 
                     if (focusedStar == currentFocusedStar) {
                         // move player
+                        Transform Panel = StarInfoCanvas.transform.Find("StarInfo");
+                        Panel.gameObject.SetActive(false);
                         mainCamera.GetComponent<CameraObject>().focus(player);
                         currentFocusedStar.GetComponent<Star>().setFocus(false);
                         player.GetComponent<Player>().currentStar = focusedStar;
@@ -52,6 +56,10 @@ public class GameManager : MonoBehaviour {
                         currentFocusedStar = null;
                     } else {
                         // get star info
+                        Transform Panel = StarInfoCanvas.transform.Find("StarInfo");
+                        TextMeshProUGUI starText = Panel.Find("Details").GetComponent<TextMeshProUGUI>();
+                        starText.text = $"{focusedStar.name}\nSTATUS: UNKNOWN\nINFLUENCE: UNKNOWN\nREPUTATION: UNKNOWN";
+                        Panel.gameObject.SetActive(true);
                         focusedStar.GetComponent<Star>().setFocus(true);
                         currentFocusedStar = focusedStar;
                         mainCamera.GetComponent<CameraObject>().focus(focusedStar);
@@ -62,8 +70,12 @@ public class GameManager : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(1)) {
             mainCamera.GetComponent<CameraObject>().focus(player);
-            currentFocusedStar.GetComponent<Star>().setFocus(false);
-            currentFocusedStar = null;
+            if (currentFocusedStar != null) {
+                Transform Panel = StarInfoCanvas.transform.Find("StarInfo");
+                Panel.gameObject.SetActive(false);
+                currentFocusedStar.GetComponent<Star>().setFocus(false);
+                currentFocusedStar = null;
+            }
         }
     }
 

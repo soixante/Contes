@@ -94,7 +94,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - CellDensity: 23
+    - CellDensity: 30
     - CellSpeed: 0.5
     - Cutoff_Height: -0.56
     - Edge: -0.05
@@ -102,7 +102,7 @@ Material:
     - Luminosity: 2
     - Noise_Scale: 40
     - Noise_Strength: 1
-    - SolarFlares: 15
+    - SolarFlares: 12
     - Wireframe_Size: 0.9
     - _AlphaClip: 0
     - _Blend: 0
